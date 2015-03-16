@@ -11,7 +11,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-browserify');
-  grunt.laodNpmTasks('grunt-karma');
+  grunt.loadNpmTasks('grunt-karma');
 
   grunt.initConfig({
 
@@ -20,12 +20,13 @@ module.exports = function(grunt) {
         jshintrc: '.jshintrc'
       },
       dev: {
-        src: ['Gruntfile.js', 'test/drones_api_test.js', 'server.js', 'models/**/*.js', 'routes/**/*.js', 'app/**/*.js']
+        src: ['Gruntfile.js', 'test/drones_api_test.js', 'server.js', 'models/**/*.js', 'routes/**/*.js']
       }
     },
 
     jscs: {
-      src: ['test/drones_api_test.js', 'test/karma_tests/drones_controller_test.js', 'server.js', 'models/**/*.js', 'routes/**/*.js', 'app/**/*.js'],
+      // src: ['test/drones_api_test.js', 'test/karma_tests/drones_controller_test.js', 'server.js', 'models/**/*.js', 'routes/**/*.js'],
+      src: [],
       options: {
         config: '.jscsrc'
       }
@@ -68,7 +69,7 @@ module.exports = function(grunt) {
 	    	dest: 'test/karma_tests/karma_test_bundle.js'
 	    },
 	    options: {
-	    	transfom: ['reactify', 'debowerify']
+	    	transform: ['reactify', 'debowerify']
 	    }
 	},
 
@@ -78,7 +79,7 @@ module.exports = function(grunt) {
 		}
 	}
   });
-  grunt.registerTask('test', ['jshint', 'jscs', 'mocha']);
+  grunt.registerTask('test', ['jshint', 'jscs', 'simplemocha']);
   grunt.registerTask('default', ['test']);
 
   grunt.registerTask('build', ['clean', 'browserify', 'copy']);
