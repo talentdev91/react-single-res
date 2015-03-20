@@ -3,10 +3,13 @@
 var Drone = require('../models/Drone');
 var bodyparser = require('body-parser');
 
-module.exports = function() {
+module.exports = function(app) {
 	
 	app.use(bodyparser.json());
 
+	app.get('/', function(req, res) {
+		res.status(200).send({'msg': 'ok'});
+	});
 	app.get('/drones', function(req, res) {
 		Drone.find({}, function(err, data) {
 			if (err) {
